@@ -23,16 +23,6 @@
 \begin{document}
 \maketitle
 
-% SLIDE 2
-%\begin{frame}{Context: Neutral Atom Quantum Computing}
-\begin{frame}{Neutral Atom Quantum Computing}
-    \framesubtitle{Context}
-    \begin{itemize}
-        \item \textbf{The Paradigm:} Neutral atoms trapped in optical tweezers act as qubits, offering long coherence times and dynamic 2D/3D topologies.
-        \item \textbf{Analog Mode \& QUBO:} The physical dynamics (Ising Hamiltonian) perfectly map to Quadratic Unconstrained Binary Optimization (QUBO) problems.
-        \item \textbf{The Hardware Limit:} Exciting atoms to the Rydberg state induces the \textit{Rydberg blockade}. This naturally enforces constraints, making it ideal for Maximum Independent Set (MIS) problems on Unit Disk Graphs (UDG).
-    \end{itemize}
-\end{frame}
 
 \begin{frame}{QUBO problems}
     \framesubtitle{QUBO formulation}
@@ -45,9 +35,10 @@ where:
 \begin{itemize}
     \item $x = (x_1, x_2, \dots, x_n)$ is a vector of $n$ binary decision variables;
     \item $Q$ is an $n \times n$ square matrix of real constants detailing the problem's costs and interactions.
+    \item $x_i^2 = x_i$ for any $x_i \in \{0,1\}$. Thus, any linear term of the objective function can be mapped directly onto the main diagonal of the $Q$ matrix ($Q_{i,i}$), while the off-diagonal elements ($Q_{i,j}$ for $i \neq j$) encode the quadratic interactions, or "penalties", between pairs of variables.
+
 \end{itemize}
 
-A key mathematical property of binary variables is that $x_i^2 = x_i$ for any $x_i \in \{0,1\}$. This elegantly allows any linear term of the objective function to be mapped directly onto the main diagonal of the $Q$ matrix ($Q_{i,i}$), while the off-diagonal elements ($Q_{i,j}$ for $i \neq j$) encode the quadratic interactions, or "penalties," between pairs of variables.
 \end{frame}
 
 
@@ -93,8 +84,31 @@ A key mathematical property of binary variables is that $x_i^2 = x_i$ for any $x
     \framesubtitle{Components}
     \begin{figure}[htbp]
         \centering
-        \includegraphics[width=0.6\textwidth]{img/principal_compo_QPU.png}
+        \includegraphics[width=0.5\textwidth]{img/principal_compo_QPU.png}
+        \vspace{-0.2cm}
+       
+            \caption{\footnotesize
+           
+
+            \textit{Image adapted from: L. Henriet et al., "Quantum computing with neutral atoms," Quantum, vol. 4 (2020)}}
+                
+            
+    
+       
+
     \end{figure}
+    
+\end{frame}
+
+% SLIDE 2
+%\begin{frame}{Context: Neutral Atom Quantum Computing}
+\begin{frame}{Neutral Atom Quantum Computing}
+    \framesubtitle{Context}
+    \begin{itemize}
+        \item \textbf{The Paradigm:} Neutral atoms trapped in optical tweezers act as qubits, offering long coherence times and dynamic 2D/3D topologies.
+        \item \textbf{Analog Mode \& QUBO:} The physical dynamics (Ising Hamiltonian) perfectly map to Quadratic Unconstrained Binary Optimization (QUBO) problems.
+        \item \textbf{The Hardware Limit:} Exciting atoms to the Rydberg state induces the \textit{Rydberg blockade}. This naturally enforces constraints, making it ideal for Maximum Independent Set (MIS) problems on Unit Disk Graphs (UDG).
+    \end{itemize}
 \end{frame}
 
 % SLIDE 4
@@ -380,7 +394,7 @@ A key mathematical property of binary variables is that $x_i^2 = x_i$ for any $x
 \begin{frame}{Future Outlook}
 \framesubtitle{Moving Beyond Analog Emulation}
     \begin{itemize}
-        \item \textbf{Direct Physical Deployment:} Overcoming the current reliance on HPC emulators by submitting JSON job registries directly to a physical Neutral Atom QPU, evaluating empirical resilience against raw physical noise.
+        \item \textbf{Direct Physical Deployment:} Overcoming the current reliance on HPC emulators by submitting tasks directly to a physical Neutral Atom QPU, evaluating empirical resilience against raw physical noise.
         \item \textbf{Advanced Laser Pulse Optimization:} Exploring Optimal Control Theory (OCT) or Analog QAOA to dynamically shape the Rabi frequency and detuning profiles, minimizing diabatic transitions and boosting ground-state probability.
         \item \textbf{Alternative Problem Formulations:} Expanding the orchestrator to automatically translate higher-level combinatorial problems (e.g., Integer Programming) into platform-compliant UDG topologies.
     \end{itemize}
@@ -537,25 +551,6 @@ A key mathematical property of binary variables is that $x_i^2 = x_i$ for any $x
     \end{table}
 \end{frame}
 
-% SLIDE: Appendix - SA Theory
-\begin{frame}{Appendix: Simulated Annealing Engine}
-\framesubtitle{Energy Formulation and Spatial Perturbations}
-    SA operates as a probabilistic, single-trajectory metaheuristic. It optimizes the continuous spatial layout by iteratively minimizing an internal energy $E(S)$:
-    $$ E(S) = E_{active} + E_{crosstalk} + P_{geom} $$
-
-    \vspace{0.2cm}
-    \textbf{1. Geometric Neighborhood Moves ($S \to S^{\prime}$):}
-    \begin{itemize}
-        \item \textbf{Jitter ($60\%$):} Micro-displacement of a single atom. The maximum radius scales proportionally with the current temperature.
-        \item \textbf{Swap ($20\%$):} The coordinates of two distinct atoms are perfectly swapped, resolving topological entanglements.
-        \item \textbf{Jump ($20\%$):} An atom is randomly replaced anywhere within the permissible $R_{max}$ boundary for global exploration.
-    \end{itemize}
-
-    \vspace{0.2cm}
-    \textbf{2. Thermodynamic Evolution:} \\
-    Transitions to a worse configuration ($\Delta E > 0$) are accepted following the Boltzmann distribution to escape local minima:
-    $$ P(S \to S^{\prime}) = e^{-\frac{\Delta E}{T}} $$
-\end{frame}
 
 % SLIDE: Appendix - SA Parametrization 15x15
 \begin{frame}{Appendix: SA Parametrization}
@@ -641,6 +636,21 @@ A key mathematical property of binary variables is that $x_i^2 = x_i$ for any $x
     \end{table}
 \end{frame}
 
+% SLIDE: Appendix - Van der Waals
+\begin{frame}{Appendix: The Van der Waals Interaction}
+\framesubtitle{Physical Constraints and the Rydberg Blockade}
+    The interaction between pairs of neutral atoms in the Rydberg state is governed by the Van der Waals potential for dipole-dipole interactions:
+    $$ V_{ij} = \frac{C_{6}}{r_{ij}^{6}} $$
+
+    \vspace{0.2cm}
+    \textbf{Physical and Mathematical Implications:}
+    \begin{itemize}
+        \item \textbf{Variables:} $C_6$ is a constant dependent on the specific atomic species and excitation level, while $r_{ij}$ is the spatial Euclidean distance between atoms $i$ and $j$.
+        \item \textbf{The Rydberg Blockade:} As the distance $r_{ij}$ decreases, the repulsive energy $V_{ij}$ scales massively. This interaction strictly prevents two spatially close atoms from being simultaneously excited to the Rydberg state.
+        \item \textbf{QUBO Mapping:} This physical penalty natively acts as the quadratic off-diagonal terms ($Q_{i,j}$) of the combinatorial matrix. It heavily suppresses configurations that violate the logical boundaries of the target graph.
+    \end{itemize}
+\end{frame}
+
 % SLIDE: Appendix - Fitness Function (1/2)
 \begin{frame}{Appendix: Fitness Function Formulation}
 \framesubtitle{Improved Topological MAE (1/2)}
@@ -670,10 +680,31 @@ A key mathematical property of binary variables is that $x_i^2 = x_i$ for any $x
     \vspace{0.4cm}
 
     \textbf{4. Final Fitness Value ($F$):}\\
-    Because Genetic Algorithms natively maximize a score, the accumulated errors and penalties are inverted:
+    Because GAs natively maximize a score, the accumulated errors and penalties are inverted:
     $$ F = \frac{1}{E_{base} + P + \delta} $$
     A minimal constant $\delta = 10^{-6}$ is introduced to prevent zero-division crashes.
 \end{frame}
+
+% SLIDE: Appendix - SA Theory
+\begin{frame}{Appendix: Simulated Annealing Engine}
+\framesubtitle{Energy Formulation and Spatial Perturbations}
+    SA operates as a probabilistic, single-trajectory metaheuristic. It optimizes the continuous spatial layout by iteratively minimizing an internal energy $E(S)$:
+    $$ E(S) = E_{base} + P $$
+
+    \vspace{0.2cm}
+    \textbf{1. Geometric Neighborhood Moves ($S \to S^{\prime}$):}
+    \begin{itemize}
+        \item \textbf{Jitter ($60\%$):} Micro-displacement of a single atom. The maximum radius scales proportionally with the current temperature.
+        \item \textbf{Swap ($20\%$):} The coordinates of two distinct atoms are perfectly swapped, resolving topological entanglements.
+        \item \textbf{Jump ($20\%$):} An atom is randomly replaced anywhere within the permissible $R_{max}$ boundary for global exploration.
+    \end{itemize}
+
+    \vspace{0.2cm}
+    \textbf{2. Thermodynamic Evolution:} \\
+    Transitions to a worse configuration ($\Delta E > 0$) are accepted following the Boltzmann distribution to escape local minima:
+    $$ P(S \to S^{\prime}) = e^{-\frac{\Delta E}{T}} $$
+\end{frame}
+
 
 % SLIDE: Appendix - Spectral Clustering (1/2)
 \begin{frame}{Appendix: Spectral Clustering}

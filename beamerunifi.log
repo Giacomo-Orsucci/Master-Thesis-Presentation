@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.7.16)  26 AUG 2026 18:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.7.16)  31 AUG 2026 18:09
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -808,65 +808,67 @@ Package pdftex.def Info: assets/background.png  used on input line 24.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./assets/background.png (PNG copy)>]
-LaTeX Font Info:    Trying to load font information for TS1+Carlito-OsF on input line 35.
- (/usr/share/texlive/texmf-dist/tex/latex/carlito/TS1Carlito-OsF.fd
-File: TS1Carlito-OsF.fd 2014/08/20 (autoinst) Font definitions for TS1/Carlito-OsF.
-)
-LaTeX Font Info:    Font shape `TS1/Carlito-OsF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 35.
-LaTeX Font Info:    Font shape `OT1/Carlito-OsF/b/n' will be
-(Font)              scaled to size 10.0pt on input line 35.
-LaTeX Font Info:    Font shape `OT1/Carlito-OsF/m/it' will be
-(Font)              scaled to size 10.0pt on input line 35.
-LaTeX Font Info:    Font shape `OT1/Carlito-OsF/m/n' will be
-(Font)              scaled to size 4.0pt on input line 35.
- [2
-
- <./assets/logo_RGB.png (PNG copy)>]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 51.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 42.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 51.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 42.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `OT1/Carlito-OsF/m/it' will be
-(Font)              scaled to size 7.0pt on input line 51.
+(Font)              scaled to size 10.0pt on input line 42.
 LaTeX Font Info:    Font shape `OT1/Carlito-OsF/m/it' will be
-(Font)              scaled to size 5.0pt on input line 51.
- [3
+(Font)              scaled to size 7.0pt on input line 42.
+LaTeX Font Info:    Font shape `OT1/Carlito-OsF/m/it' will be
+(Font)              scaled to size 5.0pt on input line 42.
+LaTeX Font Info:    Trying to load font information for TS1+Carlito-OsF on input line 42.
+ (/usr/share/texlive/texmf-dist/tex/latex/carlito/TS1Carlito-OsF.fd
+File: TS1Carlito-OsF.fd 2014/08/20 (autoinst) Font definitions for TS1/Carlito-OsF.
+)
+LaTeX Font Info:    Font shape `TS1/Carlito-OsF/m/n' will be
+(Font)              scaled to size 10.0pt on input line 42.
+LaTeX Font Info:    Font shape `OT1/Carlito-OsF/m/n' will be
+(Font)              scaled to size 4.0pt on input line 42.
+ [2
+
+ <./assets/logo_RGB.png (PNG copy)>] [3
 
 ] [4
 
-] [5
-
 ]
-<img/principal_compo_QPU.png, id=58, 665.48625pt x 555.07375pt>
+<img/principal_compo_QPU.png, id=53, 665.48625pt x 555.07375pt>
 File: img/principal_compo_QPU.png Graphic file (type png)
 <use img/principal_compo_QPU.png>
-Package pdftex.def Info: img/principal_compo_QPU.png  used on input line 98.
-(pdftex.def)             Requested size: 239.00558pt x 199.34361pt.
+Package pdftex.def Info: img/principal_compo_QPU.png  used on input line 101.
+(pdftex.def)             Requested size: 199.1693pt x 166.11685pt.
+LaTeX Font Info:    Font shape `OT1/Carlito-OsF/m/n' will be
+(Font)              scaled to size 9.0pt on input line 101.
+LaTeX Font Info:    Font shape `OT1/Carlito-OsF/m/it' will be
+(Font)              scaled to size 8.0pt on input line 101.
 
-Overfull \vbox (27.71463pt too high) detected at line 98
+Overfull \vbox (16.34225pt too high) detected at line 101
  []
 
-[6
+[5
 
  <./img/principal_compo_QPU.png>]
-LaTeX Font Info:    Font shape `OT1/Carlito-OsF/b/it' will be
-(Font)              scaled to size 10.0pt on input line 112.
 LaTeX Font Info:    Font shape `OT1/Carlito-OsF/b/n' will be
-(Font)              scaled to size 5.0pt on input line 112.
-LaTeX Font Info:    Font shape `OT1/Carlito-OsF/m/it' will be
-(Font)              scaled to size 8.0pt on input line 112.
+(Font)              scaled to size 10.0pt on input line 112.
+ [6
+
+]
+LaTeX Font Info:    Font shape `OT1/Carlito-OsF/b/it' will be
+(Font)              scaled to size 10.0pt on input line 126.
+LaTeX Font Info:    Font shape `OT1/Carlito-OsF/b/n' will be
+(Font)              scaled to size 5.0pt on input line 126.
  [7
 
 ]
 <img/base_pipeline.png, id=73, 443.6575pt x 423.5825pt>
 File: img/base_pipeline.png Graphic file (type png)
 <use img/base_pipeline.png>
-Package pdftex.def Info: img/base_pipeline.png  used on input line 122.
+Package pdftex.def Info: img/base_pipeline.png  used on input line 136.
 (pdftex.def)             Requested size: 159.333pt x 152.12117pt.
  [8
 
@@ -876,15 +878,15 @@ Package pdftex.def Info: img/base_pipeline.png  used on input line 122.
 <img/reg_10x10_d3.0.png, id=85, 654.7662pt x 722.7pt>
 File: img/reg_10x10_d3.0.png Graphic file (type png)
 <use img/reg_10x10_d3.0.png>
-Package pdftex.def Info: img/reg_10x10_d3.0.png  used on input line 154.
+Package pdftex.def Info: img/reg_10x10_d3.0.png  used on input line 168.
 (pdftex.def)             Requested size: 151.3706pt x 167.07764pt.
 <img/res_10x10_d3.0.png, id=86, 1011.78pt x 505.89pt>
 File: img/res_10x10_d3.0.png Graphic file (type png)
 <use img/res_10x10_d3.0.png>
-Package pdftex.def Info: img/res_10x10_d3.0.png  used on input line 154.
+Package pdftex.def Info: img/res_10x10_d3.0.png  used on input line 168.
 (pdftex.def)             Requested size: 239.00558pt x 119.5017pt.
 
-Overfull \vbox (1.58159pt too high) detected at line 154
+Overfull \vbox (1.58159pt too high) detected at line 168
  []
 
 [10
@@ -893,12 +895,12 @@ Overfull \vbox (1.58159pt too high) detected at line 154
 <img/reg_15x15.png, id=94, 722.7pt x 632.3625pt>
 File: img/reg_15x15.png Graphic file (type png)
 <use img/reg_15x15.png>
-Package pdftex.def Info: img/reg_15x15.png  used on input line 173.
+Package pdftex.def Info: img/reg_15x15.png  used on input line 187.
 (pdftex.def)             Requested size: 151.3706pt x 132.44302pt.
 <img/res_15x15.png, id=95, 1011.78pt x 505.89pt>
 File: img/res_15x15.png Graphic file (type png)
 <use img/res_15x15.png>
-Package pdftex.def Info: img/res_15x15.png  used on input line 173.
+Package pdftex.def Info: img/res_15x15.png  used on input line 187.
 (pdftex.def)             Requested size: 239.00558pt x 119.5017pt.
  [11
 
@@ -906,15 +908,15 @@ Package pdftex.def Info: img/res_15x15.png  used on input line 173.
 <img/reg_15x15_SA.png, id=103, 529.7391pt x 722.7pt>
 File: img/reg_15x15_SA.png Graphic file (type png)
 <use img/reg_15x15_SA.png>
-Package pdftex.def Info: img/reg_15x15_SA.png  used on input line 192.
+Package pdftex.def Info: img/reg_15x15_SA.png  used on input line 206.
 (pdftex.def)             Requested size: 151.3706pt x 206.50095pt.
 <img/res_15x15_SA.png, id=104, 1011.78pt x 505.89pt>
 File: img/res_15x15_SA.png Graphic file (type png)
 <use img/res_15x15_SA.png>
-Package pdftex.def Info: img/res_15x15_SA.png  used on input line 192.
+Package pdftex.def Info: img/res_15x15_SA.png  used on input line 206.
 (pdftex.def)             Requested size: 239.00558pt x 119.5017pt.
 
-Overfull \vbox (41.7629pt too high) detected at line 192
+Overfull \vbox (41.7629pt too high) detected at line 206
  []
 
 [12
@@ -923,12 +925,12 @@ Overfull \vbox (41.7629pt too high) detected at line 192
 <img/reg_20x20_d3.0.png, id=112, 676.4472pt x 722.7pt>
 File: img/reg_20x20_d3.0.png Graphic file (type png)
 <use img/reg_20x20_d3.0.png>
-Package pdftex.def Info: img/reg_20x20_d3.0.png  used on input line 211.
+Package pdftex.def Info: img/reg_20x20_d3.0.png  used on input line 225.
 (pdftex.def)             Requested size: 151.3706pt x 161.71828pt.
 <img/res_20x20_d3.0.png, id=113, 1011.78pt x 505.89pt>
 File: img/res_20x20_d3.0.png Graphic file (type png)
 <use img/res_20x20_d3.0.png>
-Package pdftex.def Info: img/res_20x20_d3.0.png  used on input line 211.
+Package pdftex.def Info: img/res_20x20_d3.0.png  used on input line 225.
 (pdftex.def)             Requested size: 239.00558pt x 119.5017pt.
  [13
 
@@ -936,15 +938,15 @@ Package pdftex.def Info: img/res_20x20_d3.0.png  used on input line 211.
 <img/reg_20x20_d5.0_third.png, id=122, 651.8754pt x 722.7pt>
 File: img/reg_20x20_d5.0_third.png Graphic file (type png)
 <use img/reg_20x20_d5.0_third.png>
-Package pdftex.def Info: img/reg_20x20_d5.0_third.png  used on input line 230.
+Package pdftex.def Info: img/reg_20x20_d5.0_third.png  used on input line 244.
 (pdftex.def)             Requested size: 151.3706pt x 167.81648pt.
 <img/res_20x20_d5.0_third.png, id=123, 1011.78pt x 505.89pt>
 File: img/res_20x20_d5.0_third.png Graphic file (type png)
 <use img/res_20x20_d5.0_third.png>
-Package pdftex.def Info: img/res_20x20_d5.0_third.png  used on input line 230.
+Package pdftex.def Info: img/res_20x20_d5.0_third.png  used on input line 244.
 (pdftex.def)             Requested size: 239.00558pt x 119.5017pt.
 
-Overfull \vbox (2.32043pt too high) detected at line 230
+Overfull \vbox (2.32043pt too high) detected at line 244
  []
 
 [14
@@ -955,31 +957,29 @@ Overfull \vbox (2.32043pt too high) detected at line 230
 <img/Divide_et_impera_pipeline.png, id=136, 773.89125pt x 522.95375pt>
 File: img/Divide_et_impera_pipeline.png Graphic file (type png)
 <use img/Divide_et_impera_pipeline.png>
-Package pdftex.def Info: img/Divide_et_impera_pipeline.png  used on input line 256.
+Package pdftex.def Info: img/Divide_et_impera_pipeline.png  used on input line 270.
 (pdftex.def)             Requested size: 239.00558pt x 161.50752pt.
 LaTeX Font Info:    Font shape `OT1/Carlito-OsF/b/it' will be
-(Font)              scaled to size 14.4pt on input line 256.
+(Font)              scaled to size 14.4pt on input line 270.
  [16
 
  <./img/Divide_et_impera_pipeline.png>]
 <img/Retrieval-merging.png, id=143, 372.39125pt x 533.995pt>
 File: img/Retrieval-merging.png Graphic file (type png)
 <use img/Retrieval-merging.png>
-Package pdftex.def Info: img/Retrieval-merging.png  used on input line 264.
+Package pdftex.def Info: img/Retrieval-merging.png  used on input line 278.
 (pdftex.def)             Requested size: 119.50288pt x 162.48935pt.
  [17
 
  <./img/Retrieval-merging.png>]
-LaTeX Font Info:    Font shape `OT1/Carlito-OsF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 316.
 LaTeX Font Info:    Font shape `OT1/Carlito-OsF/m/it' will be
-(Font)              scaled to size 9.0pt on input line 316.
+(Font)              scaled to size 9.0pt on input line 330.
 LaTeX Font Info:    Font shape `OT1/Carlito-OsF/b/n' will be
-(Font)              scaled to size 6.0pt on input line 316.
+(Font)              scaled to size 6.0pt on input line 330.
 LaTeX Font Info:    Font shape `OT1/Carlito-OsF/m/n' will be
-(Font)              scaled to size 6.0pt on input line 316.
+(Font)              scaled to size 6.0pt on input line 330.
 LaTeX Font Info:    Font shape `OT1/Carlito-OsF/m/it' will be
-(Font)              scaled to size 6.0pt on input line 316.
+(Font)              scaled to size 6.0pt on input line 330.
  [18
 
 ] [19
@@ -995,33 +995,29 @@ LaTeX Font Info:    Font shape `OT1/Carlito-OsF/m/it' will be
 ]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\translate ' on input line 410.
+(hyperref)                removing `\translate ' on input line 424.
 
 LaTeX Font Info:    Font shape `OT1/Carlito-OsF/b/n' will be
-(Font)              scaled to size 9.0pt on input line 473.
+(Font)              scaled to size 9.0pt on input line 487.
 
-Overfull \vbox (0.44412pt too high) detected at line 473
+Overfull \vbox (0.44412pt too high) detected at line 487
  []
 
 [24
 
 ]
-Overfull \vbox (13.96684pt too high) detected at line 506
+Overfull \vbox (13.96684pt too high) detected at line 520
  []
 
 [25
 
 ]
-Overfull \vbox (24.13684pt too high) detected at line 538
+Overfull \vbox (24.13684pt too high) detected at line 552
  []
 
 [26
 
-]
-Overfull \vbox (15.33633pt too high) detected at line 558
- []
-
-[27
+] [27
 
 ] [28
 
@@ -1030,35 +1026,41 @@ Overfull \vbox (15.33633pt too high) detected at line 558
 ] [30
 
 ]
-Overfull \vbox (14.83784pt too high) detected at line 660
+Overfull \vbox (14.83784pt too high) detected at line 670
  []
 
 [31
 
 ]
-Overfull \vbox (7.27463pt too high) detected at line 676
+Overfull \vbox (3.81712pt too high) detected at line 686
  []
 
 [32
 
 ]
-Overfull \vbox (3.97234pt too high) detected at line 692
+Overfull \vbox (15.33633pt too high) detected at line 706
  []
 
 [33
 
 ]
-LaTeX Font Info:    Font shape `OT1/Carlito-OsF/m/n' will be
-(Font)              scaled to size 12.0pt on input line 713.
-LaTeX Font Info:    Font shape `OT1/Carlito-OsF/b/n' will be
-(Font)              scaled to size 12.0pt on input line 713.
- [34
+Overfull \vbox (3.97234pt too high) detected at line 723
+ []
 
-] [35
+[34
+
+]
+LaTeX Font Info:    Font shape `OT1/Carlito-OsF/m/n' will be
+(Font)              scaled to size 12.0pt on input line 744.
+LaTeX Font Info:    Font shape `OT1/Carlito-OsF/b/n' will be
+(Font)              scaled to size 12.0pt on input line 744.
+ [35
 
 ] [36
 
 ] [37
+
+] [38
 
 ]
 \tf@nav=\write6
@@ -1075,18 +1077,18 @@ Package rerunfilecheck Info: File `beamerunifi.out' has not changed.
 (rerunfilecheck)             Checksum: 5BCEA9CF7D2D9AECE7CAC4018E9F6C5B;81.
  ) 
 Here is how much of TeX's memory you used:
- 26015 strings out of 478287
- 517873 string characters out of 5849289
+ 26019 strings out of 478287
+ 517908 string characters out of 5849289
  754692 words of memory out of 5000000
- 43562 multiletter control sequences out of 15000+600000
+ 43564 multiletter control sequences out of 15000+600000
  545353 words of font info for 84 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 128i,14n,122p,444b,946s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 128i,14n,122p,443b,946s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/carlito/crlt_ssbojb.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/carlito/crlt_llspvt.enc}</usr/share/texlive/texmf-dist/fonts/type1/typoland/carlito/Carlito-Bold.pfb></usr/share/texlive/texmf-dist/fonts/type1/typoland/carlito/Carlito-BoldItalic.pfb></usr/share/texlive/texmf-dist/fonts/type1/typoland/carlito/Carlito-Italic.pfb></usr/share/texlive/texmf-dist/fonts/type1/typoland/carlito/Carlito.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on beamerunifi.pdf (37 pages, 1631665 bytes).
+Output written on beamerunifi.pdf (38 pages, 1637063 bytes).
 PDF statistics:
- 350 PDF objects out of 1000 (max. 8388607)
- 239 compressed objects within 3 object streams
- 77 named destinations out of 1000 (max. 500000)
+ 356 PDF objects out of 1000 (max. 8388607)
+ 244 compressed objects within 3 object streams
+ 79 named destinations out of 1000 (max. 500000)
  142 words of extra memory for PDF output out of 10000 (max. 10000000)
 
