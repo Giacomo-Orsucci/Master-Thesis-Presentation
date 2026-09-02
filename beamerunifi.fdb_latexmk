@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1788252471 "/home/giacomo/Desktop/Presentazione_tesi_magistrale/beamerunifi.tex" "beamerunifi.pdf" "beamerunifi" 1788252475
+["pdflatex"] 1788345393 "/home/giacomo/Desktop/Presentazione_tesi_magistrale/beamerunifi.tex" "beamerunifi.pdf" "beamerunifi" 1788345396
   "/etc/texmf/web2c/texmf.cnf" 1744969887 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/giacomo/Desktop/Presentazione_tesi_magistrale/beamerunifi.tex" 1788252470 34886 6058930bef4c764fb12086c1a50558cc ""
+  "/home/giacomo/Desktop/Presentazione_tesi_magistrale/beamerunifi.tex" 1788345388 36468 889b761b066cd796ab5e2b09076c2864 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/carlito/crlt_llspvt.enc" 1408666177 3360 050d111af23e9d59a563139146bcfcf6 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/carlito/crlt_ssbojb.enc" 1408666177 3055 276596d62a915a4d3d82b53d6edf8814 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -239,10 +239,10 @@
   "assets/logo_RGB.png" 1729675200 395709 50dcb5f9ad146d26fb9c23e62d99b2a9 ""
   "assets/logo_RGB_negative.png" 1729675287 384412 09045e14774e733b4e5a0da675aff1bd ""
   "beamerthemesintef.sty" 1686654068 9666 215e12bd8fe90807aa167b96496245a6 ""
-  "beamerunifi.aux" 1788252475 6620 638a0675d64f013faa41453976c6d5cf "pdflatex"
-  "beamerunifi.nav" 1788252475 4094 b88cfe43d8337a225a873a2c3a4b3621 "pdflatex"
-  "beamerunifi.out" 1788252475 81 5bcea9cf7d2d9aece7cac4018e9f6c5b "pdflatex"
-  "beamerunifi.tex" 1788252470 34886 6058930bef4c764fb12086c1a50558cc ""
+  "beamerunifi.aux" 1788345396 6747 0460c2b7f7c36cf363a10dbdf204756d "pdflatex"
+  "beamerunifi.nav" 1788345396 4187 6fd4f32cf4716d419af7f0e6f76b198b "pdflatex"
+  "beamerunifi.out" 1788345396 81 5bcea9cf7d2d9aece7cac4018e9f6c5b "pdflatex"
+  "beamerunifi.tex" 1788345388 36468 889b761b066cd796ab5e2b09076c2864 ""
   "img/Divide_et_impera_pipeline.png" 1787663597 44346 4ba10fa989109044e902df03b7e87a65 ""
   "img/Retrieval-merging.png" 1787663597 30509 2cefd04e593a1599ecd6af4137e9e41a ""
   "img/base_pipeline.png" 1787650036 26724 a7a1613cd0d66e1f74dbdefc61bff10e ""

@@ -41,40 +41,40 @@ where:
 
 \end{frame}
 
-
+% SLIDE 1: Focus sulla prima parte (Termini lineari/Laser)
 \begin{frame}{Physical Formulation}
-\framesubtitle{QUBO to Ising Hamiltonian Mapping}
-    The energy of the system is described the Ising Hailtonian and The QUBO framework is an isomorphism of it: 
+\framesubtitle{QUBO to Ising Hamiltonian Mapping (1/2)}
+    The system's energy is governed by the Ising Hamiltonian. While it may appear intimidating, it breaks down into two distinct parts that map natively to the QUBO framework: 
     
     \begin{equation}
-    \hat{\mathcal{H}}(t)=\hbar\sum_{i=1}^{N}\left(\frac{\Omega(t)}{2}\hat{\sigma}_{i}^{x}-\delta(t)\hat{n}_{i}\right)+\sum_{i<j}\frac{C_{6}}{|r_{i}-r_{j}|^{6}}\hat{n}_{i}\hat{n}_{j}
-\end{equation}
-
-\begin{itemize}
-    \item $\hbar$ is the reduced Planck constant, which scales the angular frequencies of the driving laser fields ($\Omega$ and $\delta$) into actual energy terms;    \item $N$ is the total number of atoms (qubits) in the register;
-    \item $\Omega(t)$ is the time-dependent Rabi frequency, representing the amplitude of the laser exciting the atoms;
-    \item $\hat{\sigma}_{i}^{x}$ is the Pauli-X operator acting on atom $i$, which drives the transition between the ground state $|0\rangle$ and the Rydberg state $|1\rangle$;
-    \item $\delta(t)$ is the detuning parameter of the laser frequency;
-   
-\end{itemize}
-
-\end{frame}
-
-\begin{frame}{Physical Formulation}
-
-\framesubtitle{QUBO to Ising Hamiltonian Mapping}
-
-  \begin{equation}
-    \hat{\mathcal{H}}(t)=\hbar\sum_{i=1}^{N}\left(\frac{\Omega(t)}{2}\hat{\sigma}_{i}^{x}-\delta(t)\hat{n}_{i}\right)+\sum_{i<j}\frac{C_{6}}{|r_{i}-r_{j}|^{6}}\hat{n}_{i}\hat{n}_{j}
+    \hat{\mathcal{H}}(t) = \hbar\sum_{i=1}^{N}\left(\frac{\Omega(t)}{2}\hat{\sigma}_{i}^{x}-\delta(t)\hat{n}_{i}\right) + \textcolor{gray}{\sum_{i<j}\frac{C_{6}}{|r_{i}-r_{j}|^{6}}\hat{n}_{i}\hat{n}_{j}}
     \end{equation}
 
-    \vspace{0.3cm}
-
+    \vspace{0.2cm}
+    \textbf{1. Single-Atom Driving (Linear Terms):}
     \begin{itemize}
-         \item $\hat{n}_{i}$ is the occupation number operator (defined as $|1\rangle_i\langle 1|_i$) which evaluates to 1 if atom $i$ is in the Rydberg state, and 0 otherwise;
-        \item $r_i$ is the spatial position of atom $i$;
-        \item $C_6$ is the Van der Waals interaction coefficient, which is a constant dependent on the specific atomic species and platform used.
+        \item $\hbar$ is the reduced Planck constant, scaling angular frequencies to energy;
+        \item $N$ is the total number of atoms (qubits) in the register;
+        \item $\Omega(t)$ is the time-dependent Rabi frequency (laser amplitude);
+        \item $\hat{\sigma}_{i}^{x}$ is the Pauli-X operator driving the transition between the ground state $|0\rangle$ and the Rydberg state $|1\rangle$;
+        \item $\delta(t)$ is the detuning parameter of the laser frequency.
+    \end{itemize}
+\end{frame}
 
+% SLIDE 2: Focus sulla seconda parte (Termini quadratici/Interazione)
+\begin{frame}{Physical Formulation}
+\framesubtitle{QUBO to Ising Hamiltonian Mapping (2/2)}
+
+    \begin{equation}
+    \hat{\mathcal{H}}(t) = \textcolor{gray}{\hbar\sum_{i=1}^{N}\left(\frac{\Omega(t)}{2}\hat{\sigma}_{i}^{x}-\delta(t)\hat{n}_{i}\right)} + \sum_{i<j}\frac{C_{6}}{|r_{i}-r_{j}|^{6}}\hat{n}_{i}\hat{n}_{j}
+    \end{equation}
+
+    \vspace{0.2cm}
+    \textbf{2. Pairwise Interactions (Quadratic Penalties):}
+    \begin{itemize}
+        \item $\hat{n}_{i}$ is the occupation number operator ($|1\rangle_i\langle 1|_i$), evaluating to 1 if atom $i$ is in the Rydberg state, and 0 otherwise;
+        \item $r_i$ is the spatial position of atom $i$;
+        \item $C_6$ is the Van der Waals interaction coefficient, a platform-dependent constant.
     \end{itemize}
 \end{frame}
 
@@ -111,6 +111,69 @@ where:
     \end{itemize}
 \end{frame}
 
+\begin{frame}{Embeddable problems: Unit Disk Graphs}
+    \framesubtitle{UDG Problems formalization and visualization}
+    \begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[scale=1.2]
+        % --- Pannello Sinistro: Distance Model ---
+        \node at (1, 2.5) {\textbf{(a) Distance Model}};
+
+        % definizione dei nodi (punti)
+        \coordinate (A) at (0, 0);
+        \coordinate (B) at (1.5, 0.5);
+        \coordinate (C) at (0.5, 1.5);
+        \coordinate (D) at (2.5, 1.2);
+
+        % Disegno degli archi validi (distanza <= r)
+        \draw[thick] (A) -- (B) -- (C) -- (A);
+        \draw[thick] (B) -- (D);
+
+        % Disegno di un arco non valido per mostrare che la distanza > r
+        \draw[dashed, gray] (C) -- (D) node[midway, above right] {$> r$};
+
+        % Etichetta della distanza <= r
+        \draw[<->, red, thick] (A) -- (B) node[midway, below right] {$d \leq r$};
+
+        % Disegno dei pallini dei nodi
+        \filldraw (A) circle (2pt) node[below left] {$u$};
+        \filldraw (B) circle (2pt) node[below] {$v$};
+        \filldraw (C) circle (2pt) node[above] {$w$};
+        \filldraw (D) circle (2pt) node[right] {$z$};
+
+        % --- Pannello Destro: Intersection Model ---
+        \begin{scope}[xshift=5cm] % Sposto tutto a destra di 5cm
+        \node at (1, 2.5) {\textbf{(b) Intersection Model}};
+
+        \coordinate (A2) at (0, 0);
+        \coordinate (B2) at (1.5, 0.5);
+        \coordinate (C2) at (0.5, 1.5);
+        \coordinate (D2) at (2.5, 1.2);
+
+        % Raggio dei cerchi (r/2)
+        \def\rad{0.9}
+
+        % Disegno i cerchi (le "aree di influenza")
+        \draw[fill=blue!10, draw=blue, dashed] (A2) circle (\rad);
+        \draw[fill=blue!10, draw=blue, dashed] (B2) circle (\rad);
+        \draw[fill=blue!10, draw=blue, dashed] (C2) circle (\rad);
+        \draw[fill=blue!10, draw=blue, dashed] (D2) circle (\rad);
+
+        % Disegno gli archi dove i cerchi si sovrappongono
+        \draw[thick] (A2) -- (B2) -- (C2) -- (A2);
+        \draw[thick] (B2) -- (D2);
+
+        \filldraw (A2) circle (2pt);
+        \filldraw (B2) circle (2pt);
+        \filldraw (C2) circle (2pt);
+        \filldraw (D2) circle (2pt);
+        \end{scope}
+    \end{tikzpicture}
+    \caption{The equivalent geometric representations of a Unit Disk Graph (UDG). \textbf{(a)} The Distance Model connects nodes $u$ and $v$ if their Euclidean distance is $d \leq r$. \textbf{(b)} The Intersection Model places a disk of radius $r/2$ centered on each node; edges are formed exclusively where disks overlap.}
+    \label{fig:udg_models}
+    \end{figure}
+\end{frame}
+
 % SLIDE 4
 \begin{frame}{The Embedding Problem}
     \framesubtitle{Hardware Constraints (Pasqal \textit{Jade})}
@@ -145,6 +208,34 @@ where:
     \end{itemize}
     \vspace{0.3cm}
     \textbf{The Evaluation Metric:} A custom Improved Topological MAE fitness function that handles maximum physical potential clipping and bounds crossover.
+\end{frame}
+
+% SLIDE 9: Transition & Legend for Results
+\begin{frame}{Baseline Results Roadmap}
+\framesubtitle{How to Read the Experimental Data}
+    The following slides evaluate the scaling limits of monolithic embeddings (GA vs. SA). Each test is presented in a standardized dual-panel layout:
+    
+    \vspace{0.4cm}
+    \begin{columns}[T]
+        % LEFT COLUMN
+        \begin{column}{0.48\textwidth}
+            \textbf{Left Panel: Spatial Embedding}
+            \begin{itemize}
+                \item The physical 2D coordinate layout found.
+                \item Light shaded areas represent the physical atomic radius, visually confirming compliance with the minimum distance constraint ($d_{min}$).
+            \end{itemize}
+        \end{column}
+        
+        % RIGHT COLUMN
+        \begin{column}{0.48\textwidth}
+            \textbf{Right Panel: Analog Quantum Readout}
+            \begin{itemize}
+                \item The probability distribution of the actual bitstrings measured after the adiabatic emulation.
+                \item \textbf{\textcolor{green}{Green Bars:}} The \textit{true mathematical ground states}, verified via exact classical benchmarking.
+                \item \textbf{\textcolor{blue}{Blue Bars:}} Sub-optimal measurements, representing excited states or false local minima.
+            \end{itemize}
+        \end{column}
+    \end{columns}
 \end{frame}
 
 % SLIDE 7
@@ -390,6 +481,20 @@ where:
     \end{itemize}
 \end{frame}
 
+% SLIDE 19: Chiusura
+\begin{frame}
+    \begin{center}
+        \Large \textbf{Thank you for your attention!} \\
+        \vspace{0.5 cm}
+        \normalsize Q\&A
+    \end{center}
+\end{frame}
+
+% ==========================================
+% APPENDICE / BACKUP SLIDES
+% ==========================================
+\appendix
+
 % SLIDE: Future Outlook 1
 \begin{frame}{Future Outlook}
 \framesubtitle{Moving Beyond Analog Emulation}
@@ -407,83 +512,6 @@ where:
         \item \textbf{Alternative Clustering \& Orchestration:} Investigating hybridization with Multi-Agent Systems (MAS) or Reinforcement Learning agents for problem clustering, local evaluation, and pipeline orchestration.
         \item \textbf{Quantum-Native Boundary Resolution:} "Freezing" internal atoms that reached an optimal state and isolating strictly the conflicting \textit{border graph}. Resubmitting this border to the QPU fully delegates conflict resolution to the quantum hardware.
     \end{itemize}
-\end{frame}
-
-% SLIDE 19: Chiusura
-\begin{frame}
-    \begin{center}
-        \Large \textbf{Thank you for your attention!} \\
-        \vspace{0.5 cm}
-        \normalsize Q\&A
-    \end{center}
-\end{frame}
-
-% ==========================================
-% APPENDICE / BACKUP SLIDES
-% ==========================================
-\appendix
-
-\begin{frame}{Appendix: Unit Disk Graph Problems}
-    \framesubtitle{UDG Problems formalization and visualization}
-    \begin{figure}[htbp]
-    \centering
-    \begin{tikzpicture}[scale=1.2]
-        % --- Pannello Sinistro: Distance Model ---
-        \node at (1, 2.5) {\textbf{(a) Distance Model}};
-
-        % definizione dei nodi (punti)
-        \coordinate (A) at (0, 0);
-        \coordinate (B) at (1.5, 0.5);
-        \coordinate (C) at (0.5, 1.5);
-        \coordinate (D) at (2.5, 1.2);
-
-        % Disegno degli archi validi (distanza <= r)
-        \draw[thick] (A) -- (B) -- (C) -- (A);
-        \draw[thick] (B) -- (D);
-
-        % Disegno di un arco non valido per mostrare che la distanza > r
-        \draw[dashed, gray] (C) -- (D) node[midway, above right] {$> r$};
-
-        % Etichetta della distanza <= r
-        \draw[<->, red, thick] (A) -- (B) node[midway, below right] {$d \leq r$};
-
-        % Disegno dei pallini dei nodi
-        \filldraw (A) circle (2pt) node[below left] {$u$};
-        \filldraw (B) circle (2pt) node[below] {$v$};
-        \filldraw (C) circle (2pt) node[above] {$w$};
-        \filldraw (D) circle (2pt) node[right] {$z$};
-
-        % --- Pannello Destro: Intersection Model ---
-        \begin{scope}[xshift=5cm] % Sposto tutto a destra di 5cm
-        \node at (1, 2.5) {\textbf{(b) Intersection Model}};
-
-        \coordinate (A2) at (0, 0);
-        \coordinate (B2) at (1.5, 0.5);
-        \coordinate (C2) at (0.5, 1.5);
-        \coordinate (D2) at (2.5, 1.2);
-
-        % Raggio dei cerchi (r/2)
-        \def\rad{0.9}
-
-        % Disegno i cerchi (le "aree di influenza")
-        \draw[fill=blue!10, draw=blue, dashed] (A2) circle (\rad);
-        \draw[fill=blue!10, draw=blue, dashed] (B2) circle (\rad);
-        \draw[fill=blue!10, draw=blue, dashed] (C2) circle (\rad);
-        \draw[fill=blue!10, draw=blue, dashed] (D2) circle (\rad);
-
-        % Disegno gli archi dove i cerchi si sovrappongono
-        \draw[thick] (A2) -- (B2) -- (C2) -- (A2);
-        \draw[thick] (B2) -- (D2);
-
-        \filldraw (A2) circle (2pt);
-        \filldraw (B2) circle (2pt);
-        \filldraw (C2) circle (2pt);
-        \filldraw (D2) circle (2pt);
-        \end{scope}
-    \end{tikzpicture}
-    \caption{The equivalent geometric representations of a Unit Disk Graph (UDG). \textbf{(a)} The Distance Model connects nodes $u$ and $v$ if their Euclidean distance is $d \leq r$. \textbf{(b)} The Intersection Model places a disk of radius $r/2$ centered on each node; edges are formed exclusively where disks overlap.}
-    \label{fig:udg_models}
-    \end{figure}
 \end{frame}
 
 
