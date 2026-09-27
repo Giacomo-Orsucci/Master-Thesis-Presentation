@@ -10,105 +10,183 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{appendixnumberbeamer}
+\usepackage{verbatim}
 
 % --- METADATI DELLA COPERTINA ---
 \title[Hybrid Quantum-Classical Architecture]{Hybrid Quantum-Classical Architecture \\ for Solving Large-Scale QUBO Problems}
 \subtitle{A Divide et Impera Approach}
 
 % Pulito, senza doppi backslash iniziali e senza \vspace forzati che sballano il layout
-\author{\texorpdfstring{\\ \vspace{0.5cm} Candidate: Giacomo Orsucci \\ \vspace{0.2cm} Supervisors: Prof. B. Picano, Prof. R. Fantacci \\ Co-supervisor: Dr. C. Cicconetti}{Giacomo Orsucci}}
+\author{\texorpdfstring{\\ \vspace{0.5cm} Candidate: Giacomo Orsucci \\ \vspace{0.2cm} Supervisors: Dr. B. Picano, Prof. R. Fantacci \\ Co-supervisor: Dr. C. Cicconetti}{Giacomo Orsucci}}
 
 \date{Academic Year 2025/2026}
 
 \begin{document}
 \maketitle
+\begin{frame}{Research Context and Scholarship}
+    \framesubtitle{Institute of Informatics and Telematics (CNR) and Neutral Atoms}
+    
+    % Logo IIT in alto a destra
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[anchor=north east, xshift=-0.5cm, yshift=-0.2cm] at (current page.north east) {\includegraphics[height=0.9cm]{img/IIT.png}};
+    \end{tikzpicture}
+    
+    % Margine ridotto per tirare i riquadri più in alto
+    \vspace{0.1cm}
+    
+    % [T] allinea le colonne in alto
+    \begin{columns}[T]
+        
+        % COLONNA SINISTRA: L'Hardware
+        \begin{column}{0.48\textwidth}
+            \begin{block}{The Hardware}
+                % Contenitore fisso alto 4.8cm con contenuto centrato verticalmente [c]
+                \begin{minipage}[c][4.8cm][c]{\linewidth}
+                    \centering
+                    % L'immagine non verrà mai tagliata: si adatta senza superare i bordi
+                    \includegraphics[width=\linewidth, height=4.6cm, keepaspectratio]{img/principal_compo_QPU.png}
+                \end{minipage}
+            \end{block}
+        \end{column}
+        
+        % COLONNA DESTRA: Le Topologie Spaziali
+        \begin{column}{0.48\textwidth}
+            \begin{block}{The Challenge}
+                % Contenitore identico per avere i due blocchi alti uguali al millimetro
+                \begin{minipage}[c][4.8cm][c]{\linewidth}
+                    \centering
+                    \includegraphics[width=\linewidth, height=4.6cm, keepaspectratio]{img/2D-3D_neutral_atom_reg.png}
+                \end{minipage}
+            \end{block}
+        \end{column}
+        
+    \end{columns}
+    
+    \vfill
+    
+
+    
+    \vspace{0.1cm}
+\end{frame}
 
 
 \begin{frame}{QUBO problems}
     \framesubtitle{QUBO formulation}
     
-\begin{equation}
-    \min_{x \in \{0,1\}^n} f(x) = x^T Q x = \sum_{i=1}^{n} \sum_{j=1}^{n} Q_{i,j} x_i x_j
-\end{equation}
-
-where:
-\begin{itemize}
-    \item $x = (x_1, x_2, \dots, x_n)$ is a vector of $n$ binary decision variables;
-    \item $Q$ is an $n \times n$ square matrix of real constants detailing the problem's costs and interactions.
-    \item $x_i^2 = x_i$ for any $x_i \in \{0,1\}$. Thus, any linear term of the objective function can be mapped directly onto the main diagonal of the $Q$ matrix ($Q_{i,i}$), while the off-diagonal elements ($Q_{i,j}$ for $i \neq j$) encode the quadratic interactions, or "penalties", between pairs of variables.
-
-\end{itemize}
-
-\end{frame}
-
-% SLIDE 1: Focus sulla prima parte (Termini lineari/Laser)
-\begin{frame}{Physical Formulation}
-\framesubtitle{QUBO to Ising Hamiltonian Mapping (1/2)}
-    The system's energy is governed by the Ising Hamiltonian. While it may appear intimidating, it breaks down into two distinct parts that map natively to the QUBO framework: 
+    \vfill % Spinge l'equazione verso il centro
     
+    {\Large % Aumenta la dimensione del font matematico
     \begin{equation}
-    \hat{\mathcal{H}}(t) = \hbar\sum_{i=1}^{N}\left(\frac{\Omega(t)}{2}\hat{\sigma}_{i}^{x}-\delta(t)\hat{n}_{i}\right) + \textcolor{gray}{\sum_{i<j}\frac{C_{6}}{|r_{i}-r_{j}|^{6}}\hat{n}_{i}\hat{n}_{j}}
+        \min_{x \in \{0,1\}^n} f(x) = x^T Q x = \sum_{i=1}^{n} \sum_{j=1}^{n} Q_{i,j} x_i x_j
     \end{equation}
-
-    \vspace{0.2cm}
-    \textbf{1. Single-Atom Driving (Linear Terms):}
-    \begin{itemize}
-        \item $\hbar$ is the reduced Planck constant, scaling angular frequencies to energy;
-        \item $N$ is the total number of atoms (qubits) in the register;
-        \item $\Omega(t)$ is the time-dependent Rabi frequency (laser amplitude);
-        \item $\hat{\sigma}_{i}^{x}$ is the Pauli-X operator driving the transition between the ground state $|0\rangle$ and the Rydberg state $|1\rangle$;
-        \item $\delta(t)$ is the detuning parameter of the laser frequency.
-    \end{itemize}
+    }
+    
+    \vfill % Spinge l'equazione verso il centro
+    
 \end{frame}
 
-% SLIDE 2: Focus sulla seconda parte (Termini quadratici/Interazione)
+
+% SLIDE 1: Equazione intera e mapping
 \begin{frame}{Physical Formulation}
-\framesubtitle{QUBO to Ising Hamiltonian Mapping (2/2)}
-
+    \framesubtitle{QUBO to Ising Hamiltonian Mapping (1/3)}
+    
+    
+    \vfill
+    
+    {\Large
     \begin{equation}
-    \hat{\mathcal{H}}(t) = \textcolor{gray}{\hbar\sum_{i=1}^{N}\left(\frac{\Omega(t)}{2}\hat{\sigma}_{i}^{x}-\delta(t)\hat{n}_{i}\right)} + \sum_{i<j}\frac{C_{6}}{|r_{i}-r_{j}|^{6}}\hat{n}_{i}\hat{n}_{j}
+        \hat{\mathcal{H}}(t) = \hbar\sum_{i=1}^{N}\left(\frac{\Omega(t)}{2}\hat{\sigma}_{i}^{x}-\delta(t)\hat{n}_{i}\right) + \sum_{i<j}\frac{C_{6}}{|r_{i}-r_{j}|^{6}}\hat{n}_{i}\hat{n}_{j}
     \end{equation}
+    }
+    
+    \vfill
+\end{frame}
 
+
+% SLIDE 2: Focus sul primo termine (Lineare/Laser)
+\begin{frame}{Physical Formulation}
+    \framesubtitle{Single-Atom Driving: Linear Terms (2/3)}
+    
+    \vfill
+    
+    {\Large
+    \begin{equation}
+        \hat{\mathcal{H}}(t) = \fcolorbox{red}{white}{$\displaystyle \hbar\sum_{i=1}^{N}\left(\frac{\Omega(t)}{2}\hat{\sigma}_{i}^{x}-\delta(t)\hat{n}_{i}\right)$} + \textcolor{gray}{\sum_{i<j}\frac{C_{6}}{|r_{i}-r_{j}|^{6}}\hat{n}_{i}\hat{n}_{j}}
+    \end{equation}
+    }
+    
+    \vfill
+\end{frame}
+
+
+% SLIDE 3: Focus sul secondo termine (Quadratico/Interazione)
+\begin{frame}{Physical Formulation}
+    \framesubtitle{Pairwise Interactions: Quadratic Penalties (3/3)}
+    
+    \vfill
+    
+    {\Large
+    \begin{equation}
+        \hat{\mathcal{H}}(t) = \textcolor{gray}{\hbar\sum_{i=1}^{N}\left(\frac{\Omega(t)}{2}\hat{\sigma}_{i}^{x}-\delta(t)\hat{n}_{i}\right)} + \fcolorbox{red}{white}{$\displaystyle \sum_{i<j}\frac{C_{6}}{|r_{i}-r_{j}|^{6}}\hat{n}_{i}\hat{n}_{j}$}
+    \end{equation}
+    }
+    
+    \vfill
+\end{frame}
+
+
+\begin{frame}{The Embedding Problem}
+    \framesubtitle{Hardware Constraints (Pasqal \textit{Jade})}
+    
     \vspace{0.2cm}
-    \textbf{2. Pairwise Interactions (Quadratic Penalties):}
-    \begin{itemize}
-        \item $\hat{n}_{i}$ is the occupation number operator ($|1\rangle_i\langle 1|_i$), evaluating to 1 if atom $i$ is in the Rydberg state, and 0 otherwise;
-        \item $r_i$ is the spatial position of atom $i$;
-        \item $C_6$ is the Van der Waals interaction coefficient, a platform-dependent constant.
-    \end{itemize}
-\end{frame}
-
-
-% SLIDE 3
-\begin{frame}{Neutral Atom Quantum Computing}
-    \framesubtitle{Components}
-    \begin{figure}[htbp]
-        \centering
-        \includegraphics[width=0.5\textwidth]{img/principal_compo_QPU.png}
-        \vspace{-0.2cm}
-       
-            \caption{\footnotesize
-           
-
-            \textit{Image adapted from: L. Henriet et al., "Quantum computing with neutral atoms," Quantum, vol. 4 (2020)}}
-                
-            
     
-       
-
-    \end{figure}
+    % Dashboard a 3 colonne per i vincoli fisici
+    \begin{columns}[T]
+        
+        % Vincolo 1: Raggio
+        \begin{column}{0.31\textwidth}
+            \begin{block}{Maximum Radius}
+                \centering
+                \vspace{0.2cm}
+                {\Large \textbf{50.0 $\mu$m}} \\[0.1cm]
+                \footnotesize Register boundary ($R_{\text{max}}$)
+                \vspace{0.15cm}
+            \end{block}
+        \end{column}
+        
+        % Vincolo 2: Distanza
+        \begin{column}{0.31\textwidth}
+            \begin{block}{Minimum Distance}
+                \centering
+                \vspace{0.2cm}
+                {\Large \textbf{4.0 $\mu$m}} \\[0.1cm]
+                \footnotesize Diffraction limit ($d_{\text{min}}$)
+                \vspace{0.15cm}
+            \end{block}
+        \end{column}
+        
+        % Vincolo 3: Laser
+        \begin{column}{0.34\textwidth}
+            \begin{block}{Global Laser}
+                \centering
+                \vspace{0.2cm}
+                {\Large \textbf{$\Omega(t)$ \& $\delta(t)$}} \\[0.1cm]
+                \footnotesize Uniform parameterization
+                \vspace{0.15cm}
+            \end{block}
+        \end{column}
+        
+    \end{columns}
     
-\end{frame}
-
-% SLIDE 2
-%\begin{frame}{Context: Neutral Atom Quantum Computing}
-\begin{frame}{Neutral Atom Quantum Computing}
-    \framesubtitle{Context}
-    \begin{itemize}
-        \item \textbf{The Paradigm:} Neutral atoms trapped in optical tweezers act as qubits, offering long coherence times and dynamic 2D/3D topologies.
-        \item \textbf{Analog Mode \& QUBO:} The physical dynamics (Ising Hamiltonian) perfectly map to Quadratic Unconstrained Binary Optimization (QUBO) problems.
-        \item \textbf{The Hardware Limit:} Exciting atoms to the Rydberg state induces the \textit{Rydberg blockade}. This naturally enforces constraints, making it ideal for Maximum Independent Set (MIS) problems on Unit Disk Graphs (UDG).
-    \end{itemize}
+    \vfill 
+    
+    % Immagine del polso laser in basso
+    \begin{center}
+        % Sostituisci col nome esatto della tua immagine
+        \includegraphics[width=0.95\linewidth]{img/ray_params.png}
+    \end{center}
+    
+    \vspace{0.2cm}
 \end{frame}
 
 \begin{frame}{Embeddable problems: Unit Disk Graphs}
@@ -169,34 +247,21 @@ where:
         \filldraw (D2) circle (2pt);
         \end{scope}
     \end{tikzpicture}
-    \caption{The equivalent geometric representations of a Unit Disk Graph (UDG). \textbf{(a)} The Distance Model connects nodes $u$ and $v$ if their Euclidean distance is $d \leq r$. \textbf{(b)} The Intersection Model places a disk of radius $r/2$ centered on each node; edges are formed exclusively where disks overlap.}
     \label{fig:udg_models}
     \end{figure}
 \end{frame}
 
-% SLIDE 4
-\begin{frame}{The Embedding Problem}
-    \framesubtitle{Hardware Constraints (Pasqal \textit{Jade})}
-    To execute a QUBO problem, logical variables must be mapped onto physical 2D coordinates. This spatial embedding is an $\mathsf{NP}$-Hard problem itself.
-    \vspace{0.5cm}
-    
-    \textbf{Hardware Constraints (Pasqal \textit{Jade}):}
-    \begin{itemize}
-        \item \textbf{Maximum Radius ($R_{\text{max}}$):} Register confined within $50.0 \, \mu\text{m}$.
-        \item \textbf{Minimum Distance ($d_{\text{min}}$):} Atoms cannot be closer than $4.0 \, \mu\text{m}$ (diffraction limit).
-        \item \textbf{Global Laser Parameterization:} Uniform detuning and Rabi frequency for all atoms.
-    \end{itemize}
-\end{frame}
-
 
 % SLIDE 5
-\begin{frame}{Baseline Architecture}
+\begin{frame}{Baseline}
     \framesubtitle{Pipeline Overview}
     \begin{figure}[htbp]
         \centering
         \includegraphics[width=0.4\textwidth]{img/base_pipeline.png} 
     \end{figure}
 \end{frame}
+
+\begin{comment}
 
 % SLIDE 6
 \begin{frame}{Embedding search}
@@ -237,7 +302,7 @@ where:
         \end{column}
     \end{columns}
 \end{frame}
-
+\end{comment}
 % SLIDE 7
 \begin{frame}{Baseline Results}
 \framesubtitle{GA on a 10x10 Instance}
@@ -334,24 +399,50 @@ where:
     \end{columns}
 \end{frame}
 
-% SLIDE 12
 \begin{frame}{The Scalability Wall}
-\framesubtitle{The Operational Breaking Point}
-    \textbf{The Operational Breaking Point} \\
-    Despite hardware resilience in quantum emulation, classical monolithic embedding heuristics face the \textit{spatial curse of dimensionality}.
+    \framesubtitle{The Operational Breaking Point}
     
-    \vspace{0.3cm}
-    \begin{itemize}
-        \item GA pipeline fails on $15 \times 15$ instances.
-        \item SA pipeline hits a computational wall on dense $20 \times 20$ matrices, leading to degraded spatial fitness and noisy quantum readouts.
-        \item \textbf{Conclusion:} With better classical hardware we can surely scale more, but the embedding of larger problems benefits from a paradigm shift.
-    \end{itemize}
+    \vspace{0.4cm}
+    
+    \begin{columns}[T]
+        
+        % PANNELLO SINISTRO: Il Problema (Rosso scuro/Marrone per indicare il limite)
+        \begin{column}{0.48\textwidth}
+            \begin{block}{The Monolithic Bottleneck}
+                \vspace{0.2cm}
+                \centering
+                \textbf{Spatial Curse of Dimensionality}\\[0.3cm]
+                \raggedright
+                \vspace{0.2cm}
+                \begin{itemize}
+                    \item \textbf{GA} fails on $15 \times 15$ instances.
+                    \item \textbf{SA} degrades severely on $20 \times 20$ instances.
+                \end{itemize}
+                \vspace{0.2cm}
+            \end{block}
+        \end{column}
+        
+        % PANNELLO DESTRO: La Soluzione (Blu/Verde per indicare la via d'uscita)
+        \begin{column}{0.48\textwidth}
+            \begin{block}{The Required Paradigm Shift}
+                \vspace{0.2cm}
+                \centering
+                \textbf{From Global to Distributed}\\[0.3cm]
+                \raggedright
+            The embedding of larger problems demands a structural \textbf{paradigm shift}.\\
+                
+                \vspace{0.55cm} % Spaziatura per bilanciare l'altezza con il pannello sinistro
+            \end{block}
+        \end{column}
+        
+    \end{columns}
+    
 \end{frame}
 
 
 
 % SLIDE 13
-\begin{frame}{The \textit{Divide et Impera} Architecture}
+\begin{frame}{The \textit{Divide et Impera} Approach}
 \framesubtitle{Partitioning Phase}
     \vspace{0.2cm}
     \begin{center}
@@ -361,7 +452,7 @@ where:
 \end{frame}
 
 % SLIDE 14
-\begin{frame}{The \textit{Divide et Impera} Architecture}
+\begin{frame}{The \textit{Divide et Impera} Approach}
 \framesubtitle{Merging Phase}
    \begin{center}
         \includegraphics[width=0.3\textwidth, height=0.9\textheight]{img/Retrieval-merging.png} 
@@ -409,7 +500,7 @@ where:
                 Baseline Greedy (No filter) & $-29.0$ \\
                 Filtered Greedy (Noise mitigation) & $-35.0$ \\
                 \midrule
-                \textbf{Final Low-Temp SA Tuning} & $\mathbf{-37.0^*}$ \\
+                \textbf{Final Low-Temp SA Refinement} & $\mathbf{-37.0^*}$ \\
                 \bottomrule
             \end{tabular}
             }
@@ -459,7 +550,7 @@ where:
                 \midrule
                 Filtered Greedy (Noise mitigation) & $-26.0$ \\
                 \midrule
-                \textbf{Final Low-Temp SA Tuning} & $\mathbf{-30.0^*}$ \\
+                \textbf{Final Low-Temp SA Refinement} & $\mathbf{-30.0^*}$ \\
                 \bottomrule
             \end{tabular}
             }
@@ -471,15 +562,57 @@ where:
 \end{frame}
 
 
-% SLIDE: Conclusions
 \begin{frame}{Conclusions}
-\framesubtitle{Take-Home Messages}
-    \begin{itemize}
-        \item \textbf{Current Hardware Viability:} Neutral Atom platforms have proven highly promising, capable of tackling combinatorial optimization problems beyond toy-dimension instances.
-        \item \textbf{The Necessity of Partitioning:} Monolithic embeddings hit strict physical ceilings. The \textit{Divide et Impera} architecture bypasses continuous spatial constraints by transforming intractable global configurations into manageable micro-tasks.
-        \item \textbf{Future-Proof Modularity:} The distributed approach is inherently modular. As hardware capabilities expand, the architecture scales seamlessly without requiring structural redesigns.
-    \end{itemize}
+    \framesubtitle{Take-Home Messages}
+    
+    \vspace{0.3cm}
+    
+    \begin{columns}[T]
+        
+        % Card 1: Hardware
+        \begin{column}{0.31\textwidth}
+            \begin{block}{1. Hardware Viability}
+                % Minipage per fissare l'altezza a 4.5cm per tutte le card
+                \begin{minipage}[t][4.5cm][t]{\linewidth}
+                    \centering
+                    \vspace{0.4cm}
+                    {\Large \textbf{Ready to Scale}}\\[0.4cm]
+                    \raggedright
+                    \small Neutral atom platforms prove capable of tackling optimization problems \textbf{beyond toy-dimension instances}.
+                \end{minipage}
+            \end{block}
+        \end{column}
+        
+        % Card 2: Architettura
+        \begin{column}{0.34\textwidth}
+            \begin{block}{2. The Paradigm Shift}
+                \begin{minipage}[t][4.5cm][t]{\linewidth}
+                    \centering
+                    \vspace{0.4cm}
+                    {\Large \textbf{Divide et Impera}}\\[0.4cm]
+                    \raggedright
+                    \small Bypasses strict spatial ceilings by transforming intractable global embeddings into \textbf{manageable smaller tasks}.
+                \end{minipage}
+            \end{block}
+        \end{column}
+        
+        % Card 3: Modularità
+        \begin{column}{0.31\textwidth}
+            \begin{block}{3. Future-Proofing}
+                \begin{minipage}[t][4.5cm][t]{\linewidth}
+                    \centering
+                    \vspace{0.4cm}
+                    {\Large \textbf{Modular Design}}\\[0.4cm]
+                    \raggedright
+                    \small The distributed approach guarantees \textbf{seamless scaling} alongside future hardware expansions, with no structural redesigns.
+                \end{minipage}
+            \end{block}
+        \end{column}
+        
+    \end{columns}
+    
 \end{frame}
+
 
 % SLIDE 19: Chiusura
 \begin{frame}
@@ -495,22 +628,143 @@ where:
 % ==========================================
 \appendix
 
-% SLIDE: Future Outlook 1
-\begin{frame}{Future Outlook}
-\framesubtitle{Moving Beyond Analog Emulation}
+\begin{frame}{Appendix: Future Outlook (1/2)}
+    \framesubtitle{Moving Beyond Analog Emulation}
+    
+    \vspace{0.3cm}
+    
+    \begin{columns}[T]
+        
+        % Card 1: Hardware reale
+        \begin{column}{0.31\textwidth}
+            \begin{block}{1. Physical Deployment}
+                \begin{minipage}[t][4.5cm][t]{\linewidth}
+                    \centering
+                    \vspace{0.3cm}
+                    {\large \textbf{Direct QPU Access}}\\[0.3cm]
+                    \raggedright
+                    \small Overcoming HPC emulation by submitting tasks directly to a physical Neutral Atom QPU, evaluating empirical resilience against \textbf{raw physical noise}.
+                \end{minipage}
+            \end{block}
+        \end{column}
+        
+        % Card 2: Ottimizzazione del laser
+        \begin{column}{0.31\textwidth}
+            \begin{block}{2. Laser Optimization}
+                \begin{minipage}[t][4.5cm][t]{\linewidth}
+                    \centering
+                    \vspace{0.3cm}
+                    {\large \textbf{OCT \& QAOA}}\\[0.3cm]
+                    \raggedright
+                    \small Dynamically shaping the Rabi frequency and detuning profiles to minimize diabatic transitions and \textbf{boost ground-state probability}.
+                \end{minipage}
+            \end{block}
+        \end{column}
+        
+        % Card 3: Nuovi modelli matematici
+        \begin{column}{0.34\textwidth}
+            \begin{block}{3. Problem Translation}
+                \begin{minipage}[t][4.5cm][t]{\linewidth}
+                    \centering
+                    \vspace{0.3cm}
+                    {\large \textbf{Integer Programming}}\\[0.3cm]
+                    \raggedright
+                    \small Expanding the orchestrator to automatically translate \textbf{higher-level combinatorial problems} into platform-compliant UDG topologies.
+                \end{minipage}
+            \end{block}
+        \end{column}
+        
+    \end{columns}
+    
+\end{frame}
+
+\begin{frame}{Appendix: Future Outlook (2/2)}
+    \framesubtitle{Algorithmic Enhancements}
+    
+    \vspace{0.4cm}
+    
+    \begin{columns}[T]
+        
+        % Card 1: Intelligenza Artificiale
+        \begin{column}{0.48\textwidth}
+            \begin{block}{4. Advanced Orchestration}
+                \begin{minipage}[t][4cm][t]{\linewidth}
+                    \centering
+                    \vspace{0.3cm}
+                    {\Large \textbf{AI \& MAS Hybridization}}\\[0.3cm]
+                    \raggedright
+                    Investigating hybridization with \textbf{Multi-Agent Systems (MAS)} or \textbf{Reinforcement Learning} agents to intelligently manage problem clustering, local evaluation, and pipeline routing.
+                \end{minipage}
+            \end{block}
+        \end{column}
+        
+        % Card 2: Risoluzione nativa ai bordi
+        \begin{column}{0.48\textwidth}
+            \begin{block}{5. Quantum-Native Resolution}
+                \begin{minipage}[t][4cm][t]{\linewidth}
+                    \centering
+                    \vspace{0.3cm}
+                    {\Large \textbf{Border Resubmission}}\\[0.3cm]
+                    \raggedright
+                    "Freezing" internal atoms that reached an optimal state to strictly isolate the conflicting border graph. \textbf{Resubmitting this border} to the QPU fully delegates conflict resolution to the quantum hardware.
+                \end{minipage}
+            \end{block}
+        \end{column}
+        
+    \end{columns}
+    
+\end{frame}
+
+\begin{frame}{Appendix: QUBO problems details}
+    \framesubtitle{QUBO formulation}
+    
+\begin{equation}
+    \min_{x \in \{0,1\}^n} f(x) = x^T Q x = \sum_{i=1}^{n} \sum_{j=1}^{n} Q_{i,j} x_i x_j
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $x = (x_1, x_2, \dots, x_n)$ is a vector of $n$ binary decision variables;
+    \item $Q$ is an $n \times n$ square matrix of real constants detailing the problem's costs and interactions.
+    \item $x_i^2 = x_i$ for any $x_i \in \{0,1\}$. Thus, any linear term of the objective function can be mapped directly onto the main diagonal of the $Q$ matrix ($Q_{i,i}$), while the off-diagonal elements ($Q_{i,j}$ for $i \neq j$) encode the quadratic interactions, or "penalties", between pairs of variables.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Appendix: Physical Formulation details}
+\framesubtitle{QUBO to Ising Hamiltonian Mapping (1/2)}
+    The system's energy is governed by the Ising Hamiltonian. While it may appear intimidating, it breaks down into two distinct parts that map natively to the QUBO framework: 
+    
+    \begin{equation}
+    \hat{\mathcal{H}}(t) = \hbar\sum_{i=1}^{N}\left(\frac{\Omega(t)}{2}\hat{\sigma}_{i}^{x}-\delta(t)\hat{n}_{i}\right) + \textcolor{gray}{\sum_{i<j}\frac{C_{6}}{|r_{i}-r_{j}|^{6}}\hat{n}_{i}\hat{n}_{j}}
+    \end{equation}
+
+    \vspace{0.2cm}
+    \textbf{1. Single-Atom Driving (Linear Terms):}
     \begin{itemize}
-        \item \textbf{Direct Physical Deployment:} Overcoming the current reliance on HPC emulators by submitting tasks directly to a physical Neutral Atom QPU, evaluating empirical resilience against raw physical noise.
-        \item \textbf{Advanced Laser Pulse Optimization:} Exploring Optimal Control Theory (OCT) or Analog QAOA to dynamically shape the Rabi frequency and detuning profiles, minimizing diabatic transitions and boosting ground-state probability.
-        \item \textbf{Alternative Problem Formulations:} Expanding the orchestrator to automatically translate higher-level combinatorial problems (e.g., Integer Programming) into platform-compliant UDG topologies.
+        \item $\hbar$ is the reduced Planck constant, scaling angular frequencies to energy;
+        \item $N$ is the total number of atoms (qubits) in the register;
+        \item $\Omega(t)$ is the time-dependent Rabi frequency (laser amplitude);
+        \item $\hat{\sigma}_{i}^{x}$ is the Pauli-X operator driving the transition between the ground state $|0\rangle$ and the Rydberg state $|1\rangle$;
+        \item $\delta(t)$ is the detuning parameter of the laser frequency.
     \end{itemize}
 \end{frame}
 
-% SLIDE: Future Outlook 2
-\begin{frame}{Future Outlook}
-\framesubtitle{Algorithmic Enhancements}
+% SLIDE 2: Focus sulla seconda parte (Termini quadratici/Interazione)
+\begin{frame}{Appendix: Physical Formulation details}
+\framesubtitle{QUBO to Ising Hamiltonian Mapping (2/2)}
+
+    \begin{equation}
+    \hat{\mathcal{H}}(t) = \textcolor{gray}{\hbar\sum_{i=1}^{N}\left(\frac{\Omega(t)}{2}\hat{\sigma}_{i}^{x}-\delta(t)\hat{n}_{i}\right)} + \sum_{i<j}\frac{C_{6}}{|r_{i}-r_{j}|^{6}}\hat{n}_{i}\hat{n}_{j}
+    \end{equation}
+
+    \vspace{0.2cm}
+    \textbf{2. Pairwise Interactions (Quadratic Penalties):}
     \begin{itemize}
-        \item \textbf{Alternative Clustering \& Orchestration:} Investigating hybridization with Multi-Agent Systems (MAS) or Reinforcement Learning agents for problem clustering, local evaluation, and pipeline orchestration.
-        \item \textbf{Quantum-Native Boundary Resolution:} "Freezing" internal atoms that reached an optimal state and isolating strictly the conflicting \textit{border graph}. Resubmitting this border to the QPU fully delegates conflict resolution to the quantum hardware.
+        \item $\hat{n}_{i}$ is the occupation number operator ($|1\rangle_i\langle 1|_i$), evaluating to 1 if atom $i$ is in the Rydberg state, and 0 otherwise;
+        \item $r_i$ is the spatial position of atom $i$;
+        \item $C_6$ is the Van der Waals interaction coefficient, a platform-dependent constant.
     \end{itemize}
 \end{frame}
 
@@ -734,6 +988,72 @@ where:
 \end{frame}
 
 
+\begin{frame}{Appendix: Quantum Laser Parameterization}
+    \framesubtitle{Adiabatic Pulse Shaping \& Physical Rationale}
+    
+    \vspace{0.2cm}
+    
+    \begin{columns}[T]
+        
+        % COLONNA 1: Detuning
+        \begin{column}{0.32\textwidth}
+            \begin{block}{1. Detuning Profile ($\delta$)}
+                \begin{minipage}[t][5.5cm][t]{\linewidth}
+                    \vspace{0.2cm}
+                    \centering
+                    {\large \textbf{Average Linear}}\\[0.1cm]
+                    \footnotesize (Linear Sweep Baseline)
+                    \vspace{0.3cm}
+                    
+                    \raggedright
+                    \small
+                    \textbf{The How:}\\ Sweeps from $-\Delta$ to $+\Delta$, where $\Delta$ is the average linear QUBO weight.\\[0.2cm]
+                    \textbf{The Why:}\\ Anchors the driving field to the problem's specific energy, ensuring a well-paced quantum phase transition.
+                \end{minipage}
+            \end{block}
+        \end{column}
+        
+        % COLONNA 2: Rabi Frequency
+        \begin{column}{0.32\textwidth}
+            \begin{block}{2. Rabi Amplitude ($\Omega$)}
+                \begin{minipage}[t][5.5cm][t]{\linewidth}
+                    \vspace{0.2cm}
+                    \centering
+                    {\large \textbf{Median Quadratic}}\\[0.1cm]
+                    \footnotesize (Interpolated Peak)
+                    \vspace{0.3cm}
+                    
+                    \raggedright
+                    \small
+                    \textbf{The How:}\\ Peak amplitude is set to the exact median of the active quadratic penalties.\\[0.2cm]
+                    \textbf{The Why:}\\ Provides a robust statistical scale. Prevents local extreme outlier penalties from artificially flattening the global pulse.
+                \end{minipage}
+            \end{block}
+        \end{column}
+        
+        % COLONNA 3: Limiti Hardware
+        \begin{column}{0.32\textwidth}
+            \begin{block}{3. Physical Limits}
+                \begin{minipage}[t][5.5cm][t]{\linewidth}
+                    \vspace{0.2cm}
+                    \centering
+                    {\large \textbf{$4.0 \, \mu$s \& $83\%$ Cap}}\\[0.1cm]
+                    \footnotesize (Time \& Power Bounds)
+                    \vspace{0.3cm}
+                    
+                    \raggedright
+                    \small
+                    \textbf{Evolution Time ($4000$ ns):}\\ The empirical sweet spot balancing the adiabatic theorem (needs slow evolution) against quantum decoherence (needs fast execution).\\[0.2cm]
+                    \textbf{Clipping Factor ($1.2$):}\\ Prevents non-linear hardware distortions.
+                \end{minipage}
+            \end{block}
+        \end{column}
+        
+    \end{columns}
+    
+\end{frame}
+
+
 % SLIDE: Appendix - Spectral Clustering (1/2)
 \begin{frame}{Appendix: Spectral Clustering}
 \framesubtitle{Graph Translation and Laplacian Matrix}
@@ -774,7 +1094,7 @@ where:
 % SLIDE: Appendix - SA Parametrization 100x100
 \begin{frame}{Appendix: SA Parametrization}
 \framesubtitle{Three-Tiered Configuration for the $100 \times 100$ Instance}
-    \textbf{Execution Metrics:} The deterministic greedy merging yielded $-29.0$, filtering improved it to $-35.0$, and the final SA tuning successfully reached the true global minimum of $-37.0$.
+    \textbf{Execution Metrics:} The deterministic greedy merging yielded $-29.0$, filtering improved it to $-35.0$, and the final SA refinement successfully reached the true global minimum of $-37.0$.
     \vspace{0.4cm}
 
     \begin{table}[]
@@ -821,20 +1141,57 @@ where:
     \end{table}
 \end{frame}
 
-% SLIDE: Appendix - Merging Refinement
 \begin{frame}{Appendix: Global Merging Refinement}
-\framesubtitle{Low-Temperature SA Post-Processing}
-    While the deterministic greedy merging efficiently resolves boundary overlaps, it is prone to settling into sub-optimal configurations at the cluster intersections. 
-    \vspace{0.3cm}
+    \framesubtitle{Low-Temperature SA Post-Processing Sequence}
     
-    To refine the global state, the pipeline applies a final localized perturbation using Simulated Annealing:
+
+    \begin{columns}[T]
+        
+        % Card 1: Initialization
+        \begin{column}{0.31\textwidth}
+            \begin{block}{1. Hot-Start Injection}
+                \begin{minipage}[t][4.5cm][t]{\linewidth}
+                    \centering
+                    \vspace{0.3cm}
+                    {\large \textbf{Bypass Randomness}}\\[0.3cm]
+                    \raggedright
+                    \small Unlike standard SA, the engine does not start from a random state. It directly injects the \textbf{greedy-merged bitstring} as the optimal starting configuration.
+                \end{minipage}
+            \end{block}
+        \end{column}
+        
+        % Freccia visiva implicita (spazio bianco)
+        
+        % Card 2: Thermal Range
+        \begin{column}{0.31\textwidth}
+            \begin{block}{2. Thermal Restriction}
+                \begin{minipage}[t][4.5cm][t]{\linewidth}
+                    \centering
+                    \vspace{0.3cm}
+                    {\large \textbf{Micro-Adjustments}}\\[0.3cm]
+                    \raggedright
+                    \small By bounding the inverse temperature parameter ($\beta$) to a narrow, high-value range, the engine performs strictly \textbf{localized, low-temperature} explorations.
+                \end{minipage}
+            \end{block}
+        \end{column}
+        
+        % Freccia visiva implicita (spazio bianco)
+        
+        % Card 3: Preservation
+        \begin{column}{0.34\textwidth}
+            \begin{block}{3. Structure Preservation}
+                \begin{minipage}[t][4.5cm][t]{\linewidth}
+                    \centering
+                    \vspace{0.3cm}
+                    {\large \textbf{Error Squeezing}}\\[0.3cm]
+                    \raggedright
+                    \small This refinement effectively squeezes out remaining topological boundary errors \textbf{without destroying} the highly optimized global structure assembled previously.
+                \end{minipage}
+            \end{block}
+        \end{column}
+        
+    \end{columns}
     
-    \vspace{0.2cm}
-    \begin{itemize}
-        \item \textbf{Hot-Start Initialization:} Unlike standard SA, this phase does not begin from a random state. It directly injects the greedy-merged bitstring as the starting configuration.
-        \item \textbf{Restricted Thermal Range:} By bounding the inverse temperature parameter ($\beta$) to a narrow, high-value range, the engine performs strictly localized, low-temperature micro-adjustments.
-        \item \textbf{Structure Preservation:} This thermodynamic fine-tuning effectively squeezes out the remaining topological errors without destroying the highly optimized global structure assembled in the preceding steps.
-    \end{itemize}
 \end{frame}
 
 \end{document}

@@ -40,16 +40,16 @@
 \headcommand {\beamer@framepages {20}{20}}
 \headcommand {\slideentry {0}{0}{21}{21/21}{}{0}}
 \headcommand {\beamer@framepages {21}{21}}
-\headcommand {\slideentry {0}{0}{22}{22/22}{}{0}}
-\headcommand {\beamer@framepages {22}{22}}
-\headcommand {\slideentry {0}{0}{23}{23/23}{}{0}}
-\headcommand {\beamer@framepages {23}{23}}
-\headcommand {\gdef \insertmainframenumber {22}}
+\headcommand {\gdef \insertmainframenumber {20}}
 \headcommand {\partentry {\translate {Appendix}}{1}}
-\headcommand {\beamer@partpages {1}{23}}
-\headcommand {\beamer@sectionpages {1}{23}}
-\headcommand {\beamer@subsectionpages {1}{23}}
-\headcommand {\beamer@appendixpages {24}}
+\headcommand {\beamer@partpages {1}{21}}
+\headcommand {\beamer@sectionpages {1}{21}}
+\headcommand {\beamer@subsectionpages {1}{21}}
+\headcommand {\beamer@appendixpages {22}}
+\headcommand {\slideentry {0}{0}{22}{22/22}{}{1}}
+\headcommand {\beamer@framepages {22}{22}}
+\headcommand {\slideentry {0}{0}{23}{23/23}{}{1}}
+\headcommand {\beamer@framepages {23}{23}}
 \headcommand {\slideentry {0}{0}{24}{24/24}{}{1}}
 \headcommand {\beamer@framepages {24}{24}}
 \headcommand {\slideentry {0}{0}{25}{25/25}{}{1}}
@@ -82,10 +82,14 @@
 \headcommand {\beamer@framepages {38}{38}}
 \headcommand {\slideentry {0}{0}{39}{39/39}{}{1}}
 \headcommand {\beamer@framepages {39}{39}}
-\headcommand {\beamer@partpages {24}{39}}
-\headcommand {\beamer@subsectionpages {24}{39}}
-\headcommand {\beamer@sectionpages {24}{39}}
-\headcommand {\beamer@documentpages {39}}
-\headcommand {\gdef \inserttotalframenumber {16}}
-\headcommand {\gdef \inserttotalframenumber {22}}
-\headcommand {\gdef \appendixtotalframenumber {16}}
+\headcommand {\slideentry {0}{0}{40}{40/40}{}{1}}
+\headcommand {\beamer@framepages {40}{40}}
+\headcommand {\slideentry {0}{0}{41}{41/41}{}{1}}
+\headcommand {\beamer@framepages {41}{41}}
+\headcommand {\beamer@partpages {22}{41}}
+\headcommand {\beamer@subsectionpages {22}{41}}
+\headcommand {\beamer@sectionpages {22}{41}}
+\headcommand {\beamer@documentpages {41}}
+\headcommand {\gdef \inserttotalframenumber {20}}
+\headcommand {\gdef \inserttotalframenumber {20}}
+\headcommand {\gdef \appendixtotalframenumber {20}}
